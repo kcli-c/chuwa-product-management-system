@@ -20,8 +20,6 @@ function NavBars() {
         </div>
       </header>
 
-      <div className="mt-14"></div>
-
       <div class="fixed bottom-0 left-0 right-0 bg-black h-14 flex justify-between items-center">
         <div className="w-1/3">
           <span className="text-white text-xs ms-10">@2022 All Rights Reserved</span>
