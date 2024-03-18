@@ -1,7 +1,7 @@
 function NavBars() {
   return (
     <div>
-      <header className="fixed top-0 bg-black h-14 w-full flex items-center">
+      <header className="max-md:invisible fixed top-0 bg-black h-14 w-full flex items-center">
         <div className="flex w-2/3">
           <div>
             <span className="ms-10 text-2xl font-bold text-white">Management</span>
@@ -20,19 +20,56 @@ function NavBars() {
         </div>
       </header>
 
-      <div class="fixed bottom-0 left-0 right-0 bg-black h-14 flex justify-between items-center">
-        <div className="w-1/3">
+      <div className="max-md:invisible fixed bottom-0 left-0 right-0 bg-black h-14 flex justify-between items-center">
+        <div className="w-1/3 flex">
           <span className="text-white text-xs ms-10">@2022 All Rights Reserved</span>
         </div>
-        <div class="w-1/3 text-white text-base flex justify-center">
+        <div className="w-1/3 text-white text-base flex justify-center">
           <i className="fab fa-youtube"></i>
           <i className="fab fa-twitter ms-2"></i>
           <i className="fab fa-facebook ms-2"></i>
         </div>
-        <div class="w-1/3 text-white text-xs flex justify-end">
+        <div className="w-1/3 text-white text-xs flex justify-end">
           <a href="#" className="me-3">Contact us</a>
           <a href="#" className="me-3">Privacy Policies</a>
           <a href="#" className="me-10">Help</a>
+        </div>
+      </div>
+
+
+      {/* Mobile Layout */}
+      <header className="md:invisible fixed top-0 px-5 py-3 bg-black w-full flex flex-col justify-center">
+        <div className="flex w-full justify-between items-center">
+          <div>
+            <span className="text-2xl font-bold text-white">M</span>
+            <span className="text-xs font-bold text-white">Chuwa</span>
+          </div>
+          <div>
+            <div className="text-white">
+              <button className="text-sm"><i className="far fa-user me-2"></i></button>
+              <button className="ms-7 text-sm"><i className="fas fa-cart-shopping me-2"></i>$0.00</button>
+            </div>
+          </div>
+        </div>
+        <div className="w-full mt-3 bg-white rounded flex items-center">
+            <input type="text" className="p-2 rounded w-full outline-none" placeholder="Search" />
+            <i className="fas fa-search text-gray-400 mx-3"></i>
+          </div>
+      </header>
+
+      <div className="md:invisible fixed bottom-0 left-0 right-0 py-3 bg-black justify-between flex flex-col w-full">
+        <div className="w-full text-white text-base flex justify-center">
+          <i className="fab fa-youtube"></i>
+          <i className="fab fa-twitter ms-2"></i>
+          <i className="fab fa-facebook ms-2"></i>
+        </div>
+        <div className="w-full text-white text-xs flex justify-center mt-1">
+          <a href="#" className="me-3">Contact us</a>
+          <a href="#" className="me-3">Privacy Policies</a>
+          <a href="#">Help</a>
+        </div>
+        <div className="w-full flex justify-center mt-1">
+          <span className="text-white text-xs">@2022 All Rights Reserved</span>
         </div>
       </div>
     </div>

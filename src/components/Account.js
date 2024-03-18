@@ -36,7 +36,7 @@ const Account = ({ action }) => {
 
   return (
     <div className="h-screen w-screen flex justify-around items-center bg-gray-100">
-      <div className="bg-white w-1/2 p-10 rounded shadow-xl">
+      <div className="bg-white w-1/2 p-10 rounded shadow-xl max-md:w-5/6">
         <div className="flex justify-end"><button className="fas fa-xmark text-xl"></button></div>
         {actionEnum < 3 &&
           <div>
@@ -58,18 +58,18 @@ const Account = ({ action }) => {
             </div>
           </div>}
         {actionEnum < 2 &&
-          <div className="flex justify-between mt-5">
-            <span>{`${suggestions[actionEnum]} `}
+          <div className="flex justify-between mt-5 max-md:flex-col">
+            <span className="text-center">{`${suggestions[actionEnum]} `}
               <button className="underline font-bold text-indigo-700">{suggestionButton[actionEnum]}</button>
             </span>
             {actionEnum === 0 && <button className="underline font-bold text-indigo-700">Forgot password?</button>}
           </div>}
-        {actionEnum === 3 && 
-        <div className="flex flex-col items-center">
-          <i className="fas fa-envelope-circle-check text-8xl text-indigo-700"></i>
-          <p className="mt-5">We have sent the update password link to your</p>
-          <p>email, please check that!</p>
-        </div>
+        {actionEnum === 3 &&
+          <div className="flex flex-col items-center">
+            <i className="fas fa-envelope-circle-check text-8xl text-indigo-700"></i>
+            <p className="mt-5">We have sent the update password link to your</p>
+            <p>email, please check that!</p>
+          </div>
         }
       </div>
     </div>
