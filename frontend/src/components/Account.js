@@ -56,11 +56,13 @@ const Account = ({ action }) => {
     }
     try {
       if (actionEnum === 0) {
-      const user = await signIn(data);
-      console.log(user);
+        const user = await signIn(data);
+        console.log(user);
+        console.log("sign in successful");
       } else {
         const user = await signUp(data);
         console.log(user);
+        console.log("sign up successful");
       }
     } catch (err) {
       const { message } = err;
