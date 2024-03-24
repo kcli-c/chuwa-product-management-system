@@ -1,4 +1,5 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { signIn, signUp } from '../services/auth';
 
 const Account = ({ action }) => {
   let actionEnum;
@@ -40,7 +41,7 @@ const Account = ({ action }) => {
     "/signin"
   ]
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     console.log("Submit button hit")
     event.preventDefault();
     let email = event.target.email.value;
@@ -49,6 +50,23 @@ const Account = ({ action }) => {
       return;
     }
     let password = event.target.password.value;
+    const data = {
+      "email": email,
+      "password": password,
+    }
+    try {
+      if (actionEnum === 0) {
+      const user = await signIn(data);
+      console.log(user);
+      } else {
+        const user = await signUp(data);
+        console.log(user);
+      }
+    } catch (err) {
+      const { message } = err;
+      console.log(message);
+    }
+    
   }
 
   return (
