@@ -1,3 +1,5 @@
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+
 const Account = ({ action }) => {
   let actionEnum;
   switch (action) {
@@ -33,6 +35,21 @@ const Account = ({ action }) => {
     "Sign Up",
     "Sign In"
   ];
+  const suggestionRoute = [
+    "/signup",
+    "/signin"
+  ]
+
+  const handleSubmit = (event) => {
+    console.log("Submit button hit")
+    event.preventDefault();
+    let email = event.target.email.value;
+    if (actionEnum === 2) {
+      // Jump to dummy email sent page
+      return;
+    }
+    let password = event.target.password.value;
+  }
 
   return (
     <div className="h-screen w-screen flex justify-around items-center bg-gray-100">
@@ -43,26 +60,26 @@ const Account = ({ action }) => {
             <div className="text-3xl text-center font-bold">
               <span>{titles[actionEnum]}</span>
             </div>
-            <div>
+            <form onSubmit={handleSubmit}>
               <div className="mt-5">
-                <span>Email</span>
-                <input type="text" className="p-2 border border-gray-300 rounded w-full" />
+                <label>Email</label>
+                <input type="text" name="email" className="p-2 border border-gray-300 rounded w-full" required />
               </div>
               {actionEnum < 2 && <div className="mt-5">
-                <span>Password</span>
-                <input type="text" className="p-2 border border-gray-300 rounded w-full" />
+                <label>Password</label>
+                <input type={actionEnum === 0 ? "password" : "text"} name="password" className="p-2 border border-gray-300 rounded w-full" required />
               </div>}
               <div className="flex justify-center mt-5">
-                <button className="bg-indigo-700 text-white w-full py-2 rounded">{buttonTitles[actionEnum]}</button>
+                <button type="submit" className="bg-indigo-700 text-white w-full py-2 rounded">{buttonTitles[actionEnum]}</button>
               </div>
-            </div>
+            </form>
           </div>}
         {actionEnum < 2 &&
           <div className="flex justify-between mt-5 max-md:flex-col">
             <span className="text-center">{`${suggestions[actionEnum]} `}
-              <button className="underline font-bold text-indigo-700">{suggestionButton[actionEnum]}</button>
+              <Link className="underline font-bold text-indigo-700" to={suggestionRoute[actionEnum]}>{suggestionButton[actionEnum]}</Link>
             </span>
-            {actionEnum === 0 && <button className="underline font-bold text-indigo-700">Forgot password?</button>}
+            {actionEnum === 0 && <Link className="underline font-bold text-indigo-700" to={"/update-password"}>Forgot password?</Link>}
           </div>}
         {actionEnum === 3 &&
           <div className="flex flex-col items-center">
