@@ -1,5 +1,7 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { signIn, signUp } from '../services/auth';
+import { useDispatch } from 'react-redux';
+import { authUser, signUpUser } from '../app/userSlice';
 
 const Account = ({ action }) => {
   let actionEnum;
@@ -41,6 +43,8 @@ const Account = ({ action }) => {
     "/signin"
   ]
 
+  const dispatch = useDispatch();
+
   const handleSubmit = async (event) => {
     console.log("Submit button hit")
     event.preventDefault();
@@ -54,22 +58,26 @@ const Account = ({ action }) => {
       "email": email,
       "password": password,
     }
-    try {
+    // try {
       if (actionEnum === 0) {
-        const user = await signIn(data);
-        console.log(user);
-        console.log("sign in successful");
+        // const user = await signIn(data);
+        // console.log(user);
+        // console.log("sign in successful");
+        dispatch(authUser(data))
       } else {
-        const user = await signUp(data);
-        console.log(user);
-        console.log("sign up successful");
+        // const user = await signUp(data);
+        // console.log(user);
+        // console.log("sign up successful");
+        dispatch(signUpUser(data))
       }
-    } catch (err) {
-      const { message } = err;
-      console.log(message);
-    }
+    // } catch (err) {
+    //   const { message } = err;
+    //   console.log(message);
+    // }
     
   }
+
+  
 
   return (
     <div className="h-screen w-screen flex justify-around items-center bg-gray-100">

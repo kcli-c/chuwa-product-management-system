@@ -1,4 +1,25 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { logOutUser } from '../app/userSlice';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+
 function NavBars() {
+  const { isAuthenticated } = useSelector(state => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  if (!isAuthenticated) {
+    console.log("not authenticated");
+  } else {
+    console.log("authenticated");
+  }
+
+  const handleLogout = async () => {
+    console.log("logout button hit");
+    dispatch(logOutUser());
+    navigate('/signin');
+  }
+
   return (
     <div>
       <header className="max-md:invisible fixed top-0 bg-black h-14 w-full flex items-center">
@@ -14,7 +35,10 @@ function NavBars() {
         </div>
         <div className="flex w-1/3 justify-end">
           <div className="me-10 text-white">
-            <button className="text-sm"><i className="far fa-user me-2"></i> Sign in</button>
+            {isAuthenticated ?
+              <button className="text-sm" onClick={handleLogout}><i className="far fa-user me-2"></i>Sign out</button> 
+              : <Link className="text-sm" to="/signin" state={{ from: location.pathname }}><i className="far fa-user me-2"></i>Sign in</Link> }
+            
             <button className="ms-7 text-sm"><i className="fas fa-cart-shopping me-2"></i>$0.00</button>
           </div>
         </div>
@@ -52,9 +76,9 @@ function NavBars() {
           </div>
         </div>
         <div className="w-full mt-3 bg-white rounded flex items-center">
-            <input type="text" className="p-2 rounded w-full outline-none" placeholder="Search" />
-            <i className="fas fa-search text-gray-400 mx-3"></i>
-          </div>
+          <input type="text" className="p-2 rounded w-full outline-none" placeholder="Search" />
+          <i className="fas fa-search text-gray-400 mx-3"></i>
+        </div>
       </header>
 
       <div className="md:invisible fixed bottom-0 left-0 right-0 py-3 bg-black justify-between flex flex-col w-full">
