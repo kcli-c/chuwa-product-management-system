@@ -23,11 +23,15 @@ function NavBars() {
 
   return (
     <div>
-      <div style={{height: "calc(100vh - 7rem)", marginTop: "3.5rem"}} className='bg-gray-100'>
+      <div className="max-md:hidden bg-gray-100" style={{height: "calc(100vh - 7rem)", marginTop: "3.5rem"}}>
           <Outlet />
       </div>
 
-      <nav className="max-md:invisible fixed top-0 bg-black h-14 w-full flex items-center">
+      <div className="md:hidden bg-gray-100" style={{height: "calc(100vh - 12rem)", marginTop: "7rem"}}>
+          <Outlet />
+      </div>
+
+      <nav className="max-md:hidden fixed top-0 bg-black h-14 w-full flex items-center">
         <div className="flex w-2/3">
           <div>
             <span className="ms-10 text-2xl font-bold text-white">Management</span>
@@ -49,7 +53,7 @@ function NavBars() {
         </div>
       </nav>
 
-      <div className="max-md:invisible fixed bottom-0 left-0 right-0 bg-black h-14 flex justify-between items-center">
+      <div className="max-md:hidden fixed bottom-0 left-0 right-0 bg-black h-14 flex justify-between items-center">
         <div className="w-1/3 flex">
           <span className="text-white text-xs ms-10">@2022 All Rights Reserved</span>
         </div>
@@ -67,7 +71,7 @@ function NavBars() {
 
 
       {/* Mobile Layout */}
-      <header className="md:invisible fixed top-0 px-5 py-3 bg-black w-full flex flex-col justify-center">
+      <header className="md:hidden fixed top-0 px-5 h-28 bg-black w-full flex flex-col justify-center">
         <div className="flex w-full justify-between items-center">
           <div>
             <span className="text-2xl font-bold text-white">M</span>
@@ -86,7 +90,7 @@ function NavBars() {
         </div>
       </header>
 
-      <div className="md:invisible fixed bottom-0 left-0 right-0 py-3 bg-black justify-between flex flex-col w-full">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 py-3 h-20 bg-black justify-between flex flex-col w-full">
         <div className="w-full text-white text-base flex justify-center">
           <i className="fab fa-youtube"></i>
           <i className="fab fa-twitter ms-2"></i>
