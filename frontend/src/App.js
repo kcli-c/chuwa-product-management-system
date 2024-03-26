@@ -5,17 +5,17 @@ import Account from './components/Account'
 import NavBars from './components/NavBars'
 
 // button's purple-ish color: indigo-700
-// Entire page's background color: gray-100
 
 function App() {
   return (
     <div>
     <BrowserRouter>
       <Routes>
-        <Route path="/">
-          <Route path="signup" element={<div><NavBars /><Account action="Sign up"/></div>} />
-          <Route path="signin" element={<div><NavBars /><Account action="Sign in"/></div>} />
-          <Route path="update-password" element={<div><NavBars /><Account action="Update password"/></div>} />
+        <Route path="/" element={<NavBars />}>
+          <Route path="signup" element={<Account action="Sign up"/>} />
+          <Route path="signin" element={<Account action="Sign in"/>} />
+          <Route path="update-password" element={<Account action="Update password"/>} />
+          <Route path="testing" element={<div><p>Hello World</p></div>} />
         </Route>
       </Routes>
     </BrowserRouter>

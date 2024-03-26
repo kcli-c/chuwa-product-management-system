@@ -1,5 +1,4 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { signIn, signUp } from '../services/auth';
 import { useDispatch } from 'react-redux';
 import { authUser, signUpUser } from '../app/userSlice';
 
@@ -58,29 +57,15 @@ const Account = ({ action }) => {
       "email": email,
       "password": password,
     }
-    // try {
-      if (actionEnum === 0) {
-        // const user = await signIn(data);
-        // console.log(user);
-        // console.log("sign in successful");
-        dispatch(authUser(data))
-      } else {
-        // const user = await signUp(data);
-        // console.log(user);
-        // console.log("sign up successful");
-        dispatch(signUpUser(data))
-      }
-    // } catch (err) {
-    //   const { message } = err;
-    //   console.log(message);
-    // }
-    
+    if (actionEnum === 0) {
+      dispatch(authUser(data))
+    } else {
+      dispatch(signUpUser(data))
+    }
   }
 
-  
-
   return (
-    <div className="h-screen w-screen flex justify-around items-center bg-gray-100">
+    <div className="h-full w-full flex justify-around items-center">
       <div className="bg-white w-1/2 p-10 rounded shadow-xl max-md:w-5/6">
         <div className="flex justify-end"><button className="fas fa-xmark text-xl"></button></div>
         {actionEnum < 3 &&

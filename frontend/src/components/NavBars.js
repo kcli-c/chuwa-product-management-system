@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { logOutUser } from '../app/userSlice';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 function NavBars() {
   const { isAuthenticated } = useSelector(state => state.user);
@@ -22,7 +23,11 @@ function NavBars() {
 
   return (
     <div>
-      <header className="max-md:invisible fixed top-0 bg-black h-14 w-full flex items-center">
+      <div style={{height: "calc(100vh - 7rem)", marginTop: "3.5rem"}} className='bg-gray-100'>
+          <Outlet />
+      </div>
+
+      <nav className="max-md:invisible fixed top-0 bg-black h-14 w-full flex items-center">
         <div className="flex w-2/3">
           <div>
             <span className="ms-10 text-2xl font-bold text-white">Management</span>
@@ -42,7 +47,7 @@ function NavBars() {
             <button className="ms-7 text-sm"><i className="fas fa-cart-shopping me-2"></i>$0.00</button>
           </div>
         </div>
-      </header>
+      </nav>
 
       <div className="max-md:invisible fixed bottom-0 left-0 right-0 bg-black h-14 flex justify-between items-center">
         <div className="w-1/3 flex">
