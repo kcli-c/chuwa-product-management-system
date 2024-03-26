@@ -92,7 +92,7 @@ const Account = ({ action }) => {
             <span className="text-center">{`${suggestions[actionEnum]} `}
               <Link className="underline font-bold text-indigo-700" to={suggestionRoute[actionEnum]}>{suggestionButton[actionEnum]}</Link>
             </span>
-            {actionEnum === 0 && <Link className="underline font-bold text-indigo-700" to={"/update-password"}>Forgot password?</Link>}
+            {actionEnum === 0 && <Link className="underline font-bold text-indigo-700 text-center" to={"/update-password"}>Forgot password?</Link>}
           </div>}
         {actionEnum === 3 &&
           <div className="flex flex-col items-center">

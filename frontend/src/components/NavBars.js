@@ -34,21 +34,21 @@ function NavBars() {
       <nav className="max-md:hidden fixed top-0 bg-black h-14 w-full flex items-center">
         <div className="flex w-2/3">
           <div>
-            <span className="ms-10 text-2xl font-bold text-white">Management</span>
-            <span className="ms-1 text-xs font-bold text-white">Chuwa</span>
+            <span className="ml-10 text-2xl font-bold text-white">Management</span>
+            <span className="ml-1 text-xs font-bold text-white">Chuwa</span>
           </div>
-          <div className="ms-16 w-full bg-white rounded flex items-center">
+          <div className="ml-16 w-full bg-white rounded flex items-center">
             <input type="text" className="p-2 rounded w-full outline-none" placeholder="Search" />
             <i className="fas fa-search text-gray-400 mx-3"></i>
           </div>
         </div>
         <div className="flex w-1/3 justify-end">
-          <div className="me-10 text-white">
+          <div className="mr-10 text-white">
             {isAuthenticated ?
-              <button className="text-sm" onClick={handleLogout}><i className="far fa-user me-2"></i>Sign out</button> 
-              : <Link className="text-sm" to="/signin" state={{ from: location.pathname }}><i className="far fa-user me-2"></i>Sign in</Link> }
+              <button className="text-sm" onClick={handleLogout}><i className="far fa-user me-2 text-xl"><i className="fas fa-star text-yellow-500 text-xs -ml-2"></i></i>Sign out</button> 
+              : <Link className="text-sm" to="/signin" state={{ from: location.pathname }}><i className="far fa-user me-2 text-xl"></i>Sign in</Link> }
             
-            <button className="ms-7 text-sm"><i className="fas fa-cart-shopping me-2"></i>$0.00</button>
+            <button className="ml-7 text-sm"><i className="fas fa-cart-shopping me-2 text-xl"></i>$0.00</button>
           </div>
         </div>
       </nav>
@@ -59,13 +59,13 @@ function NavBars() {
         </div>
         <div className="w-1/3 text-white text-base flex justify-center">
           <i className="fab fa-youtube"></i>
-          <i className="fab fa-twitter ms-2"></i>
-          <i className="fab fa-facebook ms-2"></i>
+          <i className="fab fa-twitter ml-2"></i>
+          <i className="fab fa-facebook ml-2"></i>
         </div>
         <div className="w-1/3 text-white text-xs flex justify-end">
-          <a href="#" className="me-3">Contact us</a>
-          <a href="#" className="me-3">Privacy Policies</a>
-          <a href="#" className="me-10">Help</a>
+          <a href="#" className="mr-3">Contact us</a>
+          <a href="#" className="mr-3">Privacy Policies</a>
+          <a href="#" className="mr-10">Help</a>
         </div>
       </div>
 
@@ -79,8 +79,10 @@ function NavBars() {
           </div>
           <div>
             <div className="text-white">
-              <button className="text-sm"><i className="far fa-user me-2"></i></button>
-              <button className="ms-7 text-sm"><i className="fas fa-cart-shopping me-2"></i>$0.00</button>
+              {isAuthenticated ?
+              <button className="text-sm" onClick={handleLogout}><i className="far fa-user text-lg"><i className="fas fa-star text-yellow-500 text-xs -ml-2"></i></i></button> 
+              : <Link className="text-sm" to="/signin" state={{ from: location.pathname }}><i className="far fa-user text-lg"></i></Link> }
+              <button className="ml-7 text-sm"><i className="fas fa-cart-shopping mr-2 text-lg"></i>$0.00</button>
             </div>
           </div>
         </div>
@@ -93,12 +95,12 @@ function NavBars() {
       <div className="md:hidden fixed bottom-0 left-0 right-0 py-3 h-20 bg-black justify-between flex flex-col w-full">
         <div className="w-full text-white text-base flex justify-center">
           <i className="fab fa-youtube"></i>
-          <i className="fab fa-twitter ms-2"></i>
-          <i className="fab fa-facebook ms-2"></i>
+          <i className="fab fa-twitter ml-2"></i>
+          <i className="fab fa-facebook ml-2"></i>
         </div>
         <div className="w-full text-white text-xs flex justify-center mt-1">
-          <a href="#" className="me-3">Contact us</a>
-          <a href="#" className="me-3">Privacy Policies</a>
+          <a href="#" className="mr-3">Contact us</a>
+          <a href="#" className="mr-3">Privacy Policies</a>
           <a href="#">Help</a>
         </div>
         <div className="w-full flex justify-center mt-1">
