@@ -15,6 +15,7 @@ function App() {
           <Route path="signup" element={<Account action="Sign up"/>} />
           <Route path="signin" element={<Account action="Sign in"/>} />
           <Route path="update-password" element={<Account action="Update password"/>} />
+          <Route path="email-sent" element={<Account action="Email sent"/>} />
           <Route path="testing" element={<div><p>Hello World</p></div>} />
         </Route>
       </Routes>

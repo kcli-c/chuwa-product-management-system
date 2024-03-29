@@ -7,7 +7,7 @@ exports.signin = async function (req, res, next) {
     const user = await db.User.findOne({
       email: req.body.email
     });
-    const { id, email } = user;
+    const { id, email, admin } = user;
 
     // checking if their password matches what was sent to the server
     const isMatch = await user.comparePassword(req.body.password);
@@ -18,12 +18,14 @@ exports.signin = async function (req, res, next) {
         {
           id,
           email,
+          admin,
         },
         process.env.JWT_SECRET_KEY
       );
       return res.status(200).json({
         id,
         email,
+        admin,
         token
       });
     } else {
@@ -43,17 +45,19 @@ exports.signin = async function (req, res, next) {
 exports.signup = async function (req, res, next) {
   try {
     let user = await db.User.create(req.body);
-    let { id, email } = user;
+    let { id, email, admin } = user;
     let token = await jwt.sign(
       {
         id,
         email,
+        admin,
       },
       process.env.JWT_SECRET_KEY
     );
     return res.status(200).json({
       id,
       email,
+      admin,
       token
     });
   } catch (err) {
@@ -64,7 +68,7 @@ exports.signup = async function (req, res, next) {
 
     // if there is already a user with that email
     if (err.code === 11000) {
-      err.message = 'Sorry, that username and/or email is taken';
+      err.message = 'Sorry, that email is taken';
     }
     return next({
       status: 400,

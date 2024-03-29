@@ -1,4 +1,5 @@
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { authUser, signUpUser } from '../app/userSlice';
 
@@ -43,31 +44,48 @@ const Account = ({ action }) => {
   ]
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [message, setMessage] = useState("")
 
   const handleSubmit = async (event) => {
     console.log("Submit button hit")
     event.preventDefault();
     let email = event.target.email.value;
     if (actionEnum === 2) {
-      // Jump to dummy email sent page
+      navigate("/email-sent");
       return;
     }
     let password = event.target.password.value;
-    const data = {
+    const signInData = {
       "email": email,
       "password": password,
     }
+    const signUpData = {
+      "email": email,
+      "password": password,
+      "admin": false,
+    }
     if (actionEnum === 0) {
-      dispatch(authUser(data))
+      const res = await dispatch(authUser(signInData));
+      if (res.type.includes("fulfilled")) {
+        navigate("/");
+      } else {
+        setMessage(res.payload);
+      }
     } else {
-      dispatch(signUpUser(data))
+      const res = await dispatch(signUpUser(signUpData));
+      if (res.type.includes("fulfilled")) {
+        navigate("/signin");
+      } else {
+        setMessage(res.payload);
+      }
     }
   }
 
   return (
     <div className="h-full w-full flex justify-around items-center">
       <div className="bg-white w-1/2 p-10 rounded shadow-xl max-md:w-5/6">
-        <div className="flex justify-end"><button className="fas fa-xmark text-xl"></button></div>
+        <div className="flex justify-end"><Link className="fas fa-xmark text-xl" to={"/"}></Link></div>
         {actionEnum < 3 &&
           <div>
             <div className="text-3xl text-center font-bold">
@@ -86,11 +104,12 @@ const Account = ({ action }) => {
                 <button type="submit" className="bg-indigo-700 text-white w-full py-2 rounded">{buttonTitles[actionEnum]}</button>
               </div>
             </form>
+            <p className='text-center text-red-700 font-medium mt-1'>{message}</p>
           </div>}
         {actionEnum < 2 &&
           <div className="flex justify-between mt-5 max-md:flex-col">
             <span className="text-center">{`${suggestions[actionEnum]} `}
-              <Link className="underline font-bold text-indigo-700" to={suggestionRoute[actionEnum]}>{suggestionButton[actionEnum]}</Link>
+              <Link className="underline font-bold text-indigo-700" to={suggestionRoute[actionEnum]} onClick={() => {setMessage("")}}>{suggestionButton[actionEnum]}</Link>
             </span>
             {actionEnum === 0 && <Link className="underline font-bold text-indigo-700 text-center" to={"/update-password"}>Forgot password?</Link>}
           </div>}

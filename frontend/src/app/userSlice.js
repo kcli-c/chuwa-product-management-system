@@ -14,7 +14,6 @@ export const authUser = createAsyncThunk(
     try {
       const user = await signIn(data);
       localStorage.setItem('token', user.token);
-      console.log(user)
       thunkAPI.dispatch(removeError());
       return user;
     } catch (error) {

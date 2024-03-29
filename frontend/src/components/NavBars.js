@@ -4,16 +4,12 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 
 function NavBars() {
-  const { isAuthenticated } = useSelector(state => state.user);
+  const { isAuthenticated, user } = useSelector(state => state.user);
+  console.log(user.email) // Print Current User Email
+  console.log(user.admin) // Print current User Admin Status
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-
-  if (!isAuthenticated) {
-    console.log("not authenticated");
-  } else {
-    console.log("authenticated");
-  }
 
   const handleLogout = async () => {
     console.log("logout button hit");
