@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { createProduct, updateProduct } from "../service/productService";
 
 const ProductForm = ({ product, onSubmit }) => {
@@ -9,8 +10,6 @@ const ProductForm = ({ product, onSubmit }) => {
     const [price, setPrice] = useState(product?.price || '');
     const [stock, setStock] = useState(product?.stock || '');
     const [imageLink, setImageLink] = useState(product?.image || '');
-    const [feedbackMessage, setFeedbackMessage] = useState('');
-    const [isFeedbackVisible, setIsFeedbackVisible] = useState(false);
 
 
     // If the component is used for editing, it will receive a product prop and set the form fields accordingly
@@ -28,6 +27,8 @@ const ProductForm = ({ product, onSubmit }) => {
     const handleImageUpload = (e) => {
         // Logic to handle image upload, probably involving setting the state of imageLink to the uploaded image's URL
     };
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -53,16 +54,14 @@ const ProductForm = ({ product, onSubmit }) => {
             }
             // If you have a state or context to update the product list in the UI, do it here
             // Also, you can redirect or show a success message
-            setFeedbackMessage('Product saved successfully!');
-            setIsFeedbackVisible(true);
+            alert("Product saved successfully!");
+            navigate('/') // redirect to the home page or any other page you want
         } catch (error) {
             // Handle errors, possibly showing a message to the user
-            setFeedbackMessage(`Error saving the product: ${error.message}`);
-            setIsFeedbackVisible(true);
+            alert(`Error saving the product: ${error.message}`);
             console.error('Error saving the product:', error);
         }
-        setIsFeedbackVisible(true);
-        setTimeout(() => setIsFeedbackVisible(false), 5000); // Hide after 5 seconds
+
     };
 
     return (
@@ -72,11 +71,11 @@ const ProductForm = ({ product, onSubmit }) => {
                 {product?._id ? 'Edit Product' : 'Create Product'}
                 </h1>
                 <div className="bg-white p-8 rounded-lg shadow-lg">
-                    {isFeedbackVisible && (
+                    {/* {isFeedbackVisible && (
                         <div className={`my-4 text-sm ${feedbackMessage.startsWith('Error') ? 'text-red-500' : 'text-green-500'}`}>
                             {feedbackMessage}
                         </div>
-                    )}
+                    )} */}
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
                             <label className="block text-gray-700 text-sm font-bold mb-2">

@@ -8,7 +8,7 @@ import NavBars from './components/NavBars';
 import Account from './components/Account';
 import ProductDetail from './components/ProdDetail';
 import ProductForm from './components/ProdForm';
-
+import ProductList from './components/ProductList';
 
 // button's purple-ish color: indigo-700
 // Entire page's background color: gray-100
