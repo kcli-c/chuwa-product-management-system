@@ -24,7 +24,7 @@ const ProductDetail = () => {
     let navigate = useNavigate();
 
     const handEditClick = () => {
-        navigate('product/form', { state: { product } });
+        navigate(`/product-form/${product._id}`);
     };
 
     return (

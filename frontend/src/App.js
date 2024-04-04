@@ -5,6 +5,8 @@ import Account from './components/Account'
 import NavBars from './components/NavBars'
 import ProductDetail from './components/ProdDetail';
 import ProductForm from './components/ProdForm';
+import ProdList from './components/ProdList';
+import Test from './components/Test';
 
 // button's purple-ish color: indigo-700
 
@@ -20,7 +22,8 @@ function App() {
           <Route path="email-sent" element={<Account action="Email sent"/>} />
           <Route path="/product/:productId" element={<ProductDetail />} />
           <Route path="/product-form/:productId?" element={<ProductForm />} />
-          <Route path="testing" element={<div><p>Hello World</p></div>} />
+          <Route path="/product-list" element={<ProdList />} />
+          <Route path="testing" element={<Test />} />
         </Route>
       </Routes>
     </BrowserRouter>

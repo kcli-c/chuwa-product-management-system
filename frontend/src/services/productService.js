@@ -31,3 +31,12 @@ export const getProductInfo = async (productId) => {
     throw error;
   }
 };
+
+export const getAllProducts = async () => {
+  try {
+    const response = await api.get('/products/');
+    return response.data;
+  } catch(error) {
+    throw error;
+  }
+}

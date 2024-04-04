@@ -13,6 +13,16 @@ router.post('/', async (req, res) => {
   }
 });
 
+// GET - Get all products
+router.get('/', async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.status(200).send(products);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 // PUT - Update an existing product
 router.put('/:productId', async (req, res) => {
   try {

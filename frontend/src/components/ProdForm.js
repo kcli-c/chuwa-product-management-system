@@ -1,8 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { createProduct, updateProduct } from "../services/productService";
+import { getProductInfo } from '../services/productService';
 
-const ProductForm = ({ product, onSubmit }) => {
+const ProductForm = ({ onSubmit }) => {
+    const { productId } = useParams();
+    const [ product, setProduct ] = useState(null);
+    
+    const fetchProduct = async () => {
+        try {
+            const response = await getProductInfo(productId);
+            setProduct(response);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     // Initialize form fields with product data if it exists, otherwise with default values
     const [name, setName] = useState(product?.name || '');
     const [description, setDescription] = useState(product?.description || '');
@@ -13,6 +26,10 @@ const ProductForm = ({ product, onSubmit }) => {
 
 
     // If the component is used for editing, it will receive a product prop and set the form fields accordingly
+    useEffect(() => {
+        fetchProduct();
+    }, []);
+
     useEffect(() => {
         if (product) {
             setName(product.name);
@@ -54,8 +71,8 @@ const ProductForm = ({ product, onSubmit }) => {
             }
             // If you have a state or context to update the product list in the UI, do it here
             // Also, you can redirect or show a success message
-            alert("Product saved successfully!");
-            navigate('/') // redirect to the home page or any other page you want
+            // alert("Product saved successfully!");
+            navigate('/product-list') // redirect to the home page or any other page you want
         } catch (error) {
             // Handle errors, possibly showing a message to the user
             alert(`Error saving the product: ${error.message}`);
@@ -170,7 +187,7 @@ const ProductForm = ({ product, onSubmit }) => {
                             type="submit"
                             className="bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
                         >
-                            Add Product
+                            {product?._id ? 'Edit Product' : 'Create Product'}
                         </button>
                     </form>
                 </div>
