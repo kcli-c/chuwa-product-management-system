@@ -1,10 +1,12 @@
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate, useParams, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getProductInfo } from '../services/productService';
-
+import { useSelector } from 'react-redux';
 
 const ProductDetail = () => {
+    const { isAuthenticated, user } = useSelector(state => state.user);
+
     const { productId } = useParams();
     console.log(productId)
     const [ product, setProduct ] = useState(null);
@@ -55,12 +57,12 @@ const ProductDetail = () => {
                                     }}>Out of Stock</p>
                                 </div>}
                                 <p className="text-gray-500 mb-6">{product.description}</p>
-                                <button className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-700 hover:bg-indigo-800">
-                                    Add To Cart
-                                </button>
-                                <button onClick={handEditClick} className="ml-3 inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50">
+                                <div className='flex'>
+                                <AddButton />
+                                {user.admin && <button onClick={handEditClick} className="ml-3 inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50">
                                     Edit
-                                </button>
+                                </button>}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -69,6 +71,19 @@ const ProductDetail = () => {
         </div>
     );
 };
+
+const AddButton = () => {
+    const [count, setCount] = useState(0);
+    return (
+        count === 0 ? 
+            <button className='bg-indigo-700 rounded-md px-6 py-3 w-2/5 text-white font-medium' onClick={() => setCount(count + 1)}>Add To Cart</button> : 
+            <div className='bg-indigo-700 rounded-md px-6 py-3 w-2/5 text-white flex justify-between'>
+                <button onClick={() => {setCount(count - 1)}}>-</button>
+                <span>{count}</span>
+                <button onClick={() => setCount(count + 1)}>+</button>
+            </div>
+    )
+}
 
 export default ProductDetail;
 

@@ -68,7 +68,7 @@ const Account = ({ action }) => {
     if (actionEnum === 0) {
       const res = await dispatch(authUser(signInData));
       if (res.type.includes("fulfilled")) {
-        navigate("/");
+        navigate("/product-list");
       } else {
         setMessage(res.payload);
       }
