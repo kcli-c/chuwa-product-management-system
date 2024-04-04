@@ -27,7 +27,7 @@ const ProdList = () => {
     }, [])
 
     const navigate = useNavigate();
-    
+
     if (!isAuthenticated) {
         return <Navigate to="/signin" />;
     }
@@ -62,10 +62,22 @@ const ProdList = () => {
                     return <ProdCard product={product} admin={user.admin}/> 
                 })}
             </div>
-            <input value={pageNo} onChange={(e) => setPageNo(e.target.value)}/>
+            <div className='flex justify-end mt-5'>
+                <PageButton pageNo={pageNo} setPageNo={setPageNo} maxVal={Math.ceil(products.length / 8)}/>
+            </div>
         </div>
     )
 
+}
+
+const PageButton = ({pageNo, setPageNo, maxVal}) => {
+    return (
+        <div className='mr-5 w-28 bg-indigo-700 rounded-md px-2 py-1 text-white flex justify-between'>
+            <button onClick={() => {setPageNo(Math.max(1, pageNo - 1))}}>-</button>
+            <span>{pageNo}</span>
+            <button onClick={() => setPageNo(Math.min(maxVal, pageNo + 1))}>+</button>
+        </div>
+    )
 }
 
 export default ProdList;
