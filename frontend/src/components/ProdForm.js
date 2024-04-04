@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { createProduct, updateProduct } from "../services/productService";
 import { getProductInfo } from '../services/productService';
+import { useSelector } from 'react-redux';
 
 const ProductForm = ({ onSubmit }) => {
+    const { isAuthenticated, user } = useSelector(state => state.user);
     const { productId } = useParams();
     const [ product, setProduct ] = useState(null);
     
@@ -44,8 +46,15 @@ const ProductForm = ({ onSubmit }) => {
     const handleImageUpload = (e) => {
         // Logic to handle image upload, probably involving setting the state of imageLink to the uploaded image's URL
     };
-
+    
     const navigate = useNavigate();
+
+    if (!isAuthenticated) {
+        return <Navigate to="/signin" />;
+    }
+    if (!user.admin) {
+        return <Navigate to="/product-list" />
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();

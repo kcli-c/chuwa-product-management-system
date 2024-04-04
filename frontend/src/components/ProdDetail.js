@@ -25,6 +25,10 @@ const ProductDetail = () => {
 
     let navigate = useNavigate();
 
+    if (!isAuthenticated) {
+        return <Navigate to="/signin" />;
+    }
+
     const handEditClick = () => {
         navigate(`/product-form/${product._id}`);
     };

@@ -6,11 +6,6 @@ import { useSelector } from 'react-redux';
 
 const ProdList = () => {
     const { isAuthenticated, user } = useSelector(state => state.user);
-    // if (!isAuthenticated) {
-    //     return <Navigate to="/signin" />;
-    // }
-
-    const navigate = useNavigate();
 
     const [products, setProducts] = useState([]);
     const [originalOrder, setOriginalOrder] = useState([]);
@@ -30,6 +25,12 @@ const ProdList = () => {
         }
         fetchProducts();
     }, [])
+
+    const navigate = useNavigate();
+    
+    if (!isAuthenticated) {
+        return <Navigate to="/signin" />;
+    }
 
     const handleSelectChange = (e) => {
         const value = e.target.value;
